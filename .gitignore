@@ -1,0 +1,8 @@
+# Arquivos do node js
+node_modules
+
+# Arquivos de produção
+dist
+
+# Igonar variaveis de ambiente
+.env

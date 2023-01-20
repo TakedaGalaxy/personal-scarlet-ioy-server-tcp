@@ -1,0 +1,29 @@
+{
+  "name": "projeto-iot-escarlate-server-tcp",
+  "version": "1.0.0",
+  "description": "Servidor para controle de dados, dispositivos, e armazenagem de dados",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TakedaGalaxy/Projeto-IoT-Escarlate-Server-Tcp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TakedaGalaxy/Projeto-IoT-Escarlate-Server-Tcp/issues"
+  },
+  "homepage": "https://github.com/TakedaGalaxy/Projeto-IoT-Escarlate-Server-Tcp#readme",
+  "devDependencies": {
+    "tsup": "^6.5.0",
+    "tsx": "^3.12.2",
+    "typescript": "^4.9.4",
+    "vitest": "^0.27.2"
+  }
+}
