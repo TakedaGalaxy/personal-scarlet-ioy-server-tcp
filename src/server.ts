@@ -1,9 +1,12 @@
 import net, { Socket } from "net";
 import handlerConexao from "./client";
 import { estadoType } from "./client/types";
+import * as dotenv from 'dotenv'
 
-const port = 8080;
-const host = '127.0.0.1';
+dotenv.config();
+
+const host = process.env.HOST ?? "127.0.0.1";
+const port = process.env.PORT ?? 8080;
 
 const server = net.createServer(handlerConexao);
 
@@ -13,11 +16,10 @@ export const servidorEstado: {
         estado: estadoType;
     }>
 } = {
-    clientsConectados : []
+    clientsConectados: []
 };
 
 server.listen(port, host, function () {
     console.log(`Servidor iniciado em ${host}:${port} !`);
 });
 
-console.log(process.env.TEST)
