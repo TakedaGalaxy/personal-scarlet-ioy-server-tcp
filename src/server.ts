@@ -19,3 +19,5 @@ export const servidorEstado: {
 server.listen(port, host, function () {
     console.log(`Servidor iniciado em ${host}:${port} !`);
 });
+
+console.log(process.env.TEST)
