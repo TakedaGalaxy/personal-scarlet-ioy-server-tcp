@@ -1,18 +1,18 @@
 import net from "net";
 import handlerConexao from "./client";
-import { ClientType } from "./types";
+import Dispositivo from "./client/dispositivo/dispositivo-class";
 
 export default class Servidor {
   servidorRef: net.Server;
   host: string;
   port: number;
-  clientsConectados: Array<ClientType>
+  dispositivosConectados: Array<Dispositivo>
 
   constructor(host: string = "127.0.0.1", port: number = 8080) {
     this.host = host;
     this.port = port;
     this.servidorRef = net.createServer(handlerConexao);
-    this.clientsConectados = [];
+    this.dispositivosConectados = [];
   }
 
   iniciar() {
@@ -21,16 +21,18 @@ export default class Servidor {
     });
   }
 
-  getClientsConectados() {
-    return this.clientsConectados;
+  getDispositivosConectados() {
+    return this.dispositivosConectados;
   }
 
-  addClient(clientArg: ClientType) {
-    this.clientsConectados.push(clientArg);
+  addDispositivo(dispositivoArg: Dispositivo) {
+    this.dispositivosConectados.push(dispositivoArg);
+    console.log(`(ADD) Dispositivos ${this.dispositivosConectados.map((d) => d.getId()) as Array<string>}`);
   }
 
-  removeClient(clientArg: ClientType) {
-    this.clientsConectados = this.clientsConectados.filter((client) => client.estado.id !== clientArg.estado.id);
+  removeDispositivo(dispositivoArg: Dispositivo) {
+    this.dispositivosConectados = this.dispositivosConectados.filter((dispositivo) => dispositivo.getId() !== dispositivoArg.getId());
+    console.log(`(DEL) Dispositivos ${this.dispositivosConectados.map((d) => d.getId()) as Array<string>}`);
   }
 
 }

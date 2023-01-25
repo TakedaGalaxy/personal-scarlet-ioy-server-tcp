@@ -1,16 +1,16 @@
 //Utilizado apenas para teste antes da implementação do banco de dados
-export async function verificaBancoDadosPlaceHolder(arg:any, resposta:boolean){
-  
-  return new Promise ((resolve,reject)=>{
-    setTimeout(()=>{
+export async function verificaBancoDadosPlaceHolder(arg: any, conclusao: boolean, resposta: any) {
 
-      if(resposta){
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+
+      if (conclusao) {
         resolve(resposta);
       }
 
       reject(resposta);
 
-    },500);
+    }, 500);
   })
 
 }
