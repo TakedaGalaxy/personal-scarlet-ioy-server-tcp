@@ -6,7 +6,7 @@ export default class Dispositivo {
   socket: Socket;
   id: string;
   modelo: string;
-  endereco : string;
+  endereco: string;
 
   constructor(socket: Socket, id: string, modelo: string) {
     this.socket = socket;
@@ -17,7 +17,31 @@ export default class Dispositivo {
   }
 
   onData(data: Buffer) {
-    console.log(`(${this.endereco})(${this.getId()}) | Dados : ${data.toString()}`);
+
+    const dados = data.toString().split(';').filter((dado) => !!dado).map((dado) => {
+      return dado.split(',').reduce((resultado: {
+        idPeriferico?: string,
+        nome?: string,
+        dado?: string,
+        data?: string,
+        contexto?: string
+      }, campo) => {
+
+        const [chave, valor] = campo.split(':');
+
+        let { idPeriferico, nome, dado, data, contexto } = resultado;
+
+        if (!idPeriferico && chave === "IDP") idPeriferico = valor;
+        if (!nome && chave === "NM") nome = valor;
+        if (!dado && chave === "DD") dado = valor;
+        if (!data && chave === "DT") data = valor;
+        if (!contexto && chave === "CT") contexto = valor;
+
+        return { idPeriferico, nome, dado, data, contexto };
+      }, {});
+    });
+
+    console.log(`(${this.endereco})(${this.getId()}) | Dados : ${dados.map((dado)=>JSON.stringify(dado))}`);
   }
 
   onClose() {
@@ -29,7 +53,7 @@ export default class Dispositivo {
     console.log(`(${this.endereco})(${this.getId()}) | Erro : ${erro.name} - ${erro.message}`);
   }
 
-  getId(){
+  getId() {
     return `${this.id}:${this.modelo}`;
   }
 
