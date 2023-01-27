@@ -1,6 +1,8 @@
 import bandoDeDados from './database';
 import servidor from './server';
 
-bandoDeDados.iniciar();
+bandoDeDados.iniciar().then((res)=>{
 
-servidor.iniciar();
+  servidor.iniciar();
+  
+});

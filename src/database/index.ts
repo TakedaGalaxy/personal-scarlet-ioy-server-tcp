@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv'
 dotenv.config();
-import * as mysql2 from 'mysql2';
+import * as mysql2 from 'mysql2/promise'
 
 class BandoDeDados {
 
@@ -23,8 +23,8 @@ class BandoDeDados {
     this.database = database;
   }
 
-  iniciar() {
-    this.bancoRef = mysql2.createConnection({
+  async iniciar() {
+    this.bancoRef = await mysql2.createConnection({
       host: this.host,
       user: this.user,
       password: this.password,
