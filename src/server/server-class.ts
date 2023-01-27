@@ -1,6 +1,6 @@
 import net from "net";
-import handlerConexao from "./client";
-import Dispositivo from "./client/dispositivo/dispositivo-class";
+import handlerConexao from "../client";
+import Dispositivo from "../client/dispositivo/dispositivo-class";
 
 export default class Servidor {
   servidorRef: net.Server;

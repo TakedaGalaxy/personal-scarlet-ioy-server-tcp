@@ -2,10 +2,10 @@
   "name": "projeto-iot-escarlate-server-tcp",
   "version": "1.0.0",
   "description": "Servidor para controle de dados, dispositivos, e armazenagem de dados",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node dist/server.js",
-    "dev": "tsx watch src/server.ts",
+    "start": "node dist/main.js",
+    "dev": "tsx watch src/main.ts",
     "build": "tsup src",
     "test": "vitest"
   },
@@ -27,6 +27,7 @@
     "vitest": "^0.27.2"
   },
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "mysql2": "^3.0.1"
   }
 }
