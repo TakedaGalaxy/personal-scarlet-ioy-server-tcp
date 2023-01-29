@@ -1,6 +1,11 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 dotenv.config();
-import * as mysql2 from 'mysql2/promise'
+import * as mysql2 from 'mysql2/promise';
+import ModelDadosRecebidos from './models/dados-recebidos';
+import ModelDispositivosCriados from './models/dispositivos-criados';
+import ModelModelos, { TypeModelosRes } from './models/modelos';
+import ModelPrerifericos from './models/perifericos';
+import ModelRelacaoModeloPeriferico from './models/relacao-modelo-periferico';
 
 class BandoDeDados {
 
@@ -13,9 +18,9 @@ class BandoDeDados {
 
 
   constructor(
-    host: string = "127.0.0.1", 
-    user: string = "root", 
-    password: string = "", 
+    host: string = "127.0.0.1",
+    user: string = "root",
+    password: string = "",
     database: string = "") {
     this.host = host;
     this.user = user;
@@ -32,6 +37,16 @@ class BandoDeDados {
     });
     console.log("Banco de dados iniciado !")
   }
+
+  getModelos = async () => new ModelModelos(this.bancoRef).getDado();
+  
+  getPerifericos = async () => new ModelPrerifericos(this.bancoRef).getDado();
+
+  getDispositivosCriados = async () => new ModelDispositivosCriados(this.bancoRef).getDado();
+
+  getRelacaoModeloPeriferico = async () => new ModelRelacaoModeloPeriferico(this.bancoRef).getDado();
+
+  getDadoRecebidos = async () => new ModelDadosRecebidos(this.bancoRef).getDado();
 
 }
 
