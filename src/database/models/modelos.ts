@@ -20,6 +20,7 @@ export default class ModelModelos implements ModelInterface<TypeModelosRes>{
       await this.bancoRef?.query(
         'CREATE TABLE `modelos` (\n' +
         '`id` varchar(255) PRIMARY KEY,\n' +
+        '`tipo` tinytext,\n' +
         '`descricao` text)'
       )
       return sucessoCriarTabelaDB("modelos");
