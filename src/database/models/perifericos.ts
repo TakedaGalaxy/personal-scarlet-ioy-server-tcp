@@ -2,7 +2,7 @@ import * as mysql2 from "mysql2/promise";
 import { erroDB, sucessoCriarTabelaDB, sucessoDeletarTabelaDB } from "../funcoes-auxiliares";
 import ModelInterface from "./interface";
 
-export default class ModelPrerifericos implements ModelInterface<TypePerifericosRes>{
+export default class ModelPerifericos implements ModelInterface<TypePerifericosRes>{
 
   bancoRef: mysql2.Connection | undefined;
 
@@ -37,7 +37,7 @@ export default class ModelPrerifericos implements ModelInterface<TypePerifericos
     } catch (erro) { return erroDB(erro); }
   }
   
-  criarReferencias(){};
+  criarReferencias = undefined;
 
 }
 

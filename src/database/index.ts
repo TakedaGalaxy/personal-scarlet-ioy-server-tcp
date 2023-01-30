@@ -3,8 +3,8 @@ dotenv.config();
 import * as mysql2 from 'mysql2/promise';
 import ModelDadosRecebidos from './models/dados-recebidos';
 import ModelDispositivosCriados from './models/dispositivos-criados';
-import ModelModelos, { TypeModelosRes } from './models/modelos';
-import ModelPrerifericos from './models/perifericos';
+import ModelModelos from './models/modelos';
+import ModelPerifericos from './models/perifericos';
 import ModelRelacaoModeloPeriferico from './models/relacao-modelo-periferico';
 
 class BandoDeDados {
@@ -29,18 +29,37 @@ class BandoDeDados {
   }
 
   async iniciar() {
-    this.bancoRef = await mysql2.createConnection({
-      host: this.host,
-      user: this.user,
-      password: this.password,
-      database: this.database
-    });
-    console.log("Banco de dados iniciado !")
+    try {
+      this.bancoRef = await mysql2.createConnection({
+        host: this.host,
+        user: this.user,
+        password: this.password,
+        database: this.database
+      });
+      console.log("Banco de dados iniciado !")
+      return true;
+    }
+    catch(erro){
+      console.log(erro)
+      return false;
+    }
+  }
+
+  async desconectar() {
+    try {
+      await this.bancoRef?.destroy();
+      console.log("Banco de dados desconectado !")
+      return true;
+    }
+    catch(erro){
+      console.log(erro)
+      return false;
+    }
   }
 
   getModelos = async () => new ModelModelos(this.bancoRef).getDado();
-  
-  getPerifericos = async () => new ModelPrerifericos(this.bancoRef).getDado();
+
+  getPerifericos = async () => new ModelPerifericos(this.bancoRef).getDado();
 
   getDispositivosCriados = async () => new ModelDispositivosCriados(this.bancoRef).getDado();
 

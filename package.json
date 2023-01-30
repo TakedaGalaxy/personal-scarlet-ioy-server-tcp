@@ -7,7 +7,9 @@
     "start": "node dist/main.js",
     "dev": "tsx watch src/main.ts",
     "build": "tsup src",
-    "test": "vitest"
+    "test": "vitest",
+    "criarDB": "tsx src/database/banco-de-dados.ts criar",
+    "deletarDB": "tsx src/database/banco-de-dados.ts deletar"
   },
   "repository": {
     "type": "git",

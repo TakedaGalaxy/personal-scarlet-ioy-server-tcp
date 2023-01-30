@@ -21,7 +21,7 @@ export default class ModelModelos implements ModelInterface<TypeModelosRes>{
         'CREATE TABLE `modelos` (\n' +
         '`id` varchar(255) PRIMARY KEY,\n' +
         '`descricao` text)'
-      );
+      )
       return sucessoCriarTabelaDB("modelos");
     }
     catch (erro) { return erroDB(erro); }
@@ -35,7 +35,7 @@ export default class ModelModelos implements ModelInterface<TypeModelosRes>{
     catch (erro) { return erroDB(erro); }
   }
 
-  criarReferencias(){};
+  criarReferencias = undefined;
 
 }
 

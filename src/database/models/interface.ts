@@ -5,5 +5,5 @@ export default interface ModelInterface<T> {
   getDado: () => Promise<T>,
   criarTabela: () => Promise<boolean>,
   deletarTabela: () => Promise<boolean>,
-  criarReferencias: () => Promise<boolean> | void
+  criarReferencias: undefined | (() => Promise<boolean>)
 }
