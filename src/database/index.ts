@@ -36,7 +36,7 @@ class BandoDeDados {
         password: this.password,
         database: this.database
       });
-      console.log("Banco de dados iniciado !")
+      console.log("🏁 Banco de dados iniciado !")
       return true;
     }
     catch(erro){
@@ -48,7 +48,7 @@ class BandoDeDados {
   async desconectar() {
     try {
       await this.bancoRef?.destroy();
-      console.log("Banco de dados desconectado !")
+      console.log("🏁 Banco de dados desconectado !")
       return true;
     }
     catch(erro){

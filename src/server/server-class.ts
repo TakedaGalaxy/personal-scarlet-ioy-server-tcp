@@ -17,7 +17,7 @@ export default class Servidor {
 
   iniciar() {
     this.servidorRef.listen(this.port, this.host, undefined, () => {
-      console.log(`Servidor iniciado em (${this.host}:${this.port}) !`);
+      console.log(`🏁 Servidor iniciado em (${this.host}:${this.port}) !`);
     });
   }
 
