@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import * as mysql2 from 'mysql2/promise';
 import ModelDadosRecebidos from './models/dados-recebidos';
-import ModelDispositivosCriados from './models/dispositivos-criados';
+import ModelDispositivosCriados, { TypeDispositivoCriado } from './models/dispositivos-criados';
 import ModelModelos from './models/modelos';
 import ModelPerifericos from './models/perifericos';
 import ModelRelacaoModeloPeriferico from './models/relacao-modelo-periferico';
@@ -39,7 +39,7 @@ class BandoDeDados {
       console.log("🏁 Banco de dados iniciado !")
       return true;
     }
-    catch(erro){
+    catch (erro) {
       console.log(erro)
       return false;
     }
@@ -51,7 +51,7 @@ class BandoDeDados {
       console.log("🏁 Banco de dados desconectado !")
       return true;
     }
-    catch(erro){
+    catch (erro) {
       console.log(erro)
       return false;
     }
@@ -66,6 +66,8 @@ class BandoDeDados {
   getRelacaoModeloPeriferico = async () => new ModelRelacaoModeloPeriferico(this.bancoRef).getDado();
 
   getDadoRecebidos = async () => new ModelDadosRecebidos(this.bancoRef).getDado();
+
+  addDispositivoCriado = async (dispositivo: TypeDispositivoCriado) => new ModelDispositivosCriados(this.bancoRef).addDispositivoCriado(dispositivo);
 
 }
 

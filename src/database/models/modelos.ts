@@ -42,6 +42,7 @@ export default class ModelModelos implements ModelInterface<TypeModelosRes>{
 
 export type TypeModelo = {
   id: string,
+  tipo:string,
   descricao: string
 }
 

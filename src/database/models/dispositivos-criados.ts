@@ -15,6 +15,14 @@ export default class ModelDispositivosCriados implements ModelInterface<TypeDisp
     return rows as TypeDispositivosCriadosRes;
   }
 
+  async addDispositivoCriado(dispositivo: TypeDispositivoCriado) {
+    try {
+      await this.bancoRef?.query(`INSERT INTO dispositivoscriados (id, modelo) VALUES ('${dispositivo.id}', '${dispositivo.modelo}')`);
+      return true;
+    }
+    catch (erro) { return erroDB(erro); }
+  }
+
   async criarTabela() {
     try {
       await this.bancoRef?.query(
@@ -45,7 +53,7 @@ export default class ModelDispositivosCriados implements ModelInterface<TypeDisp
 
 export type TypeDispositivoCriado = {
   id: string,
-  descricao: string
+  modelo: string
 }
 
 
