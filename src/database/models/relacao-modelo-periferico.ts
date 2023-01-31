@@ -20,7 +20,7 @@ export default class ModelRelacaoModeloPeriferico implements ModelInterface<Type
       await this.bancoRef?.query(
         'CREATE TABLE `relacaoModeloPeriferico`(\n' +
         '`modelo` varchar(255),\n' +
-        '`perifericos` varchar(255)\n'+
+        '`perifericos` varchar(255),\n'+
         '`nome` tinytext)'
       );
 
