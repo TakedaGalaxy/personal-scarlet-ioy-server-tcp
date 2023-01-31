@@ -1,6 +1,7 @@
 import { Socket } from "net";
 import bandoDeDados from "../database";
 import { verificaBancoDadosPlaceHolder } from "../database/placeholder";
+import Controlador from "./controle/controle-class";
 import Dispositivo from "./dispositivo/dispositivo-class";
 
 export default class Cliente {
@@ -100,7 +101,7 @@ export default class Cliente {
 
     if (tipo === "Controlador") {
 
-      const controlador = new Dispositivo(this.socket, id, modelo);
+      const controlador = new Controlador(this.socket, id, modelo);
 
       this.onData = (data: Buffer) => { controlador.onData(data) };
       this.onClose = () => { controlador.onClose() };

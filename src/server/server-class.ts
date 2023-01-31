@@ -27,12 +27,28 @@ export default class Servidor {
 
   addDispositivo(dispositivoArg: Dispositivo) {
     this.dispositivosConectados.push(dispositivoArg);
-    console.log(`(ADD) Dispositivos ${this.dispositivosConectados.map((d) => d.getId()) as Array<string>}`);
+    console.log(`(ADD) Dispositivos ${this.dispositivosConectados.map((d) => d.getIdModelo()) as Array<string>}`);
   }
 
   removeDispositivo(dispositivoArg: Dispositivo) {
-    this.dispositivosConectados = this.dispositivosConectados.filter((dispositivo) => dispositivo.getId() !== dispositivoArg.getId());
-    console.log(`(DEL) Dispositivos ${this.dispositivosConectados.map((d) => d.getId()) as Array<string>}`);
+    this.dispositivosConectados = this.dispositivosConectados.filter((dispositivo) => dispositivo.getIdModelo() !== dispositivoArg.getIdModelo());
+    console.log(`(DEL) Dispositivos ${this.dispositivosConectados.map((d) => d.getIdModelo()) as Array<string>}`);
+  }
+
+  enviarDadoDispositivosConectados(dado: string, idPeriferico: string, modelo: string, id?: string) {
+
+    if (modelo) {
+
+      const dispositivosAlvos = this.dispositivosConectados.filter(
+        id ?
+          dispositivo => dispositivo.getId() === id :
+          dispositivo => dispositivo.getModelo() === modelo);
+
+      dispositivosAlvos.forEach((dispositivo) => {
+        dispositivo.enviarDado(`IDP:${idPeriferico},DD:${dado}`);
+      });
+
+    }
   }
 
 }

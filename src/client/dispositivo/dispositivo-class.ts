@@ -42,36 +42,53 @@ export default class Dispositivo {
       }, {});
     });
 
-    console.log(`(${this.endereco})(${this.getId()}) | Dados : ${dados.map((dadoObj) => {
+    console.log(`(${this.endereco})(${this.getIdModelo()}) | Dados : `, dados.map((dadoObj) => {
 
       const { idPeriferico, contexto, dado, data, nome } = dadoObj;
 
       const dataAtual = new Date();
 
-      bancoDeDados.addDados({
+      const paraArmazenar = {
         dispositivo: this.id,
         periferico: idPeriferico ?? "",
         nome: nome ?? "",
         dado: dado ?? "",
         data: data ? new Date(data) : dataAtual,
         contexto: contexto ?? ""
-      });
+      };
 
-      return JSON.stringify(dado);
-    })}`);
+      bancoDeDados.addDados(paraArmazenar);
+
+      return JSON.stringify(paraArmazenar);
+    }));
   }
 
   onClose() {
-    console.log(`(${this.endereco})(${this.getId()}) | Fechou conexão`);
+    console.log(`(${this.endereco})(${this.getIdModelo()}) | Fechou conexão`);
     servidor.removeDispositivo(this);
   }
 
   onError(erro: Error) {
-    console.log(`(${this.endereco})(${this.getId()}) | Erro : ${erro.name} - ${erro.message}`);
+    console.log(`(${this.endereco})(${this.getIdModelo()}) | Erro : ${erro.name} - ${erro.message}`);
+  }
+
+  enviarDado(dado: string) {
+    this.socket.write(dado, (res) => {
+      if (res)
+        console.log(res)
+    });
+  }
+
+  getIdModelo() {
+    return `${this.id}:${this.modelo}`;
   }
 
   getId() {
-    return `${this.id}:${this.modelo}`;
+    return this.id;
+  }
+
+  getModelo() {
+    return this.modelo;
   }
 
 }
