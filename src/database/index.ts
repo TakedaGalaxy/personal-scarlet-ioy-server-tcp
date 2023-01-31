@@ -1,13 +1,13 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import * as mysql2 from 'mysql2/promise';
-import ModelDadosRecebidos from './models/dados-recebidos';
+import ModelDadosRecebidos, { TypeDadoRecebido } from './models/dados-recebidos';
 import ModelDispositivosCriados, { TypeDispositivoCriado } from './models/dispositivos-criados';
 import ModelModelos from './models/modelos';
 import ModelPerifericos from './models/perifericos';
 import ModelRelacaoModeloPeriferico from './models/relacao-modelo-periferico';
 
-class BandoDeDados {
+class BancoDeDados {
 
   bancoRef: mysql2.Connection | undefined
 
@@ -69,13 +69,15 @@ class BandoDeDados {
 
   addDispositivoCriado = async (dispositivo: TypeDispositivoCriado) => new ModelDispositivosCriados(this.bancoRef).addDispositivoCriado(dispositivo);
 
+  addDados = async (dados: TypeDadoRecebido) => new ModelDadosRecebidos(this.bancoRef).addDados(dados);
+
 }
 
-const bandoDeDados = new BandoDeDados(
+const bancoDeDados = new BancoDeDados(
   process.env.DB_HOST,
   process.env.DB_USUARIO,
   process.env.DB_SENHA,
   process.env.DB_NOME
 );
 
-export default bandoDeDados;
+export default bancoDeDados;

@@ -4,6 +4,7 @@ import ModelDispositivosCriados from "./models/dispositivos-criados";
 import ModelModelos from "./models/modelos";
 import ModelPerifericos from "./models/perifericos";
 import ModelRelacaoModeloPeriferico from "./models/relacao-modelo-periferico";
+import ModelTiposDados from "./models/tipos-dados";
 
 const comando = process.argv.slice(2)?.at(0) ?? "";
 const opcao = process.argv.slice(2)?.at(1) ?? "";
@@ -17,6 +18,7 @@ if (comando === "criar") {
 
     const models = [
       new ModelModelos(bandoDeDados.bancoRef),
+      new ModelTiposDados(bandoDeDados.bancoRef),
       new ModelPerifericos(bandoDeDados.bancoRef),
       new ModelDispositivosCriados(bandoDeDados.bancoRef),
       new ModelRelacaoModeloPeriferico(bandoDeDados.bancoRef),

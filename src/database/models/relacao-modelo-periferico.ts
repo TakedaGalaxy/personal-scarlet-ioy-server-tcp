@@ -20,7 +20,8 @@ export default class ModelRelacaoModeloPeriferico implements ModelInterface<Type
       await this.bancoRef?.query(
         'CREATE TABLE `relacaoModeloPeriferico`(\n' +
         '`modelo` varchar(255),\n' +
-        '`perifericos` varchar(255))'
+        '`perifericos` varchar(255)\n'+
+        '`nome` tinytext)'
       );
 
       return sucessoCriarTabelaDB("relacaoModeloPeriferico");
@@ -47,7 +48,8 @@ export default class ModelRelacaoModeloPeriferico implements ModelInterface<Type
 
 export type TypeRelacaoModeloPeriferico = {
   modelo: string,
-  perifericos: string
+  perifericos: string,
+  nome:string
 }
 
 export type TypeRelacaoModeloPerifericoRes = Array<TypeRelacaoModeloPeriferico>

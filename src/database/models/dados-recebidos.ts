@@ -15,6 +15,21 @@ export default class ModelDadosRecebidos implements ModelInterface<TypeDadosRece
     return rows as TypeDadosRecebidosRes;
   }
 
+  async addDados(dados: TypeDadoRecebido) {
+    try {
+
+      let {dispositivo, periferico, nome, dado, data, contexto} = dados;
+
+      const dateTime = data.toISOString().slice(0, 19).replace('T', ' ');
+
+      await this.bancoRef?.query(
+        `INSERT INTO dadosRecebidos (dispositivo, periferico, nome, dado, data, contexto) ` +
+          `VALUE ('${dispositivo}', '${periferico}', '${nome}', '${dado}', '${dateTime}', '${contexto}')`)
+      return true;
+    }
+    catch (erro) { return erroDB(erro) }
+  }
+
   async criarTabela() {
     try {
       await this.bancoRef?.query(

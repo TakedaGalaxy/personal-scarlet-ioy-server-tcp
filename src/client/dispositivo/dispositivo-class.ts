@@ -1,4 +1,5 @@
 import { Socket } from "net";
+import bancoDeDados from "../../database";
 import servidor from "../../server";
 
 export default class Dispositivo {
@@ -41,7 +42,23 @@ export default class Dispositivo {
       }, {});
     });
 
-    console.log(`(${this.endereco})(${this.getId()}) | Dados : ${dados.map((dado)=>JSON.stringify(dado))}`);
+    console.log(`(${this.endereco})(${this.getId()}) | Dados : ${dados.map((dadoObj) => {
+
+      const { idPeriferico, contexto, dado, data, nome } = dadoObj;
+
+      const dataAtual = new Date();
+
+      bancoDeDados.addDados({
+        dispositivo: this.id,
+        periferico: idPeriferico ?? "",
+        nome: nome ?? "",
+        dado: dado ?? "",
+        data: data ? new Date(data) : dataAtual,
+        contexto: contexto ?? ""
+      });
+
+      return JSON.stringify(dado);
+    })}`);
   }
 
   onClose() {
