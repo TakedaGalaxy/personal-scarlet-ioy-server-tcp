@@ -1,4 +1,4 @@
-# Projeto IoT Escarlate (Server Tcp)
+#Server Tcp (Projeto IoT Escarlate) (Em Desenvolvimento)
 
 Servidor para controle de dados, dispositivos, e armazenagem de dados
 
